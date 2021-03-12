@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/pceanyag/public_html/churchapp
+    - /bin/cp -R * $DEPLOYPATH
+    
