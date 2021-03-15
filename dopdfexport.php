@@ -11,7 +11,7 @@ global $db;
    }
   $Params = $_SESSION["exportParams"];
    
-  $url = "https://www.kiambuassembly.go.ke/app/";
+  $url = "https://churchapp.pceasnyaga.org";
      $mpdf = new \Mpdf\Mpdf([
     'setAutoTopMargin' => 'stretch',
     'autoMarginPadding' => 3,
@@ -23,7 +23,7 @@ global $db;
     $mpdf->WriteHTML($stylesheet,1);
   $dateCreated = date('D jS M Y g:i a');
 
-    $mpdf->SetWatermarkImage('assets/images/logo.png');
+    $mpdf->SetWatermarkImage('assets/images/logo1.jpg');
     $mpdf->showWatermarkImage = true;
     $mpdf->watermarkImageAlpha = 0.1;
  //$db->debug=1;
@@ -40,7 +40,7 @@ global $db;
 
      $getCols = $db->GetArray("select FieldName,DisplayName from dh_listview where ModuleCode='$ModuleCode'  and ListType='Main' and TableName='$tableName' order by DisplayOrder asc");
     $html ="";
-    $html .="<p style='v-align:center;'> <img src='assets/images/logo.png' width='210px' height='70px'></p>";
+    $html .="<p style='v-align:center;'> <img src='assets/images/logo1.jpg' width='300px' height='52px'></p>";
     $html .="<p style='v-align:center;'><h2>$ModuleName</h2></p>";
 
      $html .= "<table class='gridtable' width='99%'>";
