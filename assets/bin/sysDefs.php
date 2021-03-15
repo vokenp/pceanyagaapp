@@ -19,9 +19,9 @@ define('DB_DRIVER', 'mysqli');
 if (DB_DRIVER == "mysqli") {
 
 define('DB_HOSTNAME', 'localhost');
-define('DB_USERNAME', 'pceanyag_root');
-define('DB_PASSWORD', 'P@$$w0rd@nyaga');
-define('DB_DATABASE', 'pceanyag_churchapp');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', 'P@$$w0rd');
+define('DB_DATABASE', 'churchapp');
 define('DB_PREFIX', 'dh_');
 if (!defined('DB_PORT')) define('DB_PORT', '3306');
 

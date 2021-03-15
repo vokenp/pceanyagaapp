@@ -15,6 +15,7 @@ $op = filter_input(INPUT_GET, "view");
     foreach ($getColumns as $key => $value) {
        $rst[$value] = "";  
     }
+    $rst["ContributionDate"] = date('d-m-Y');
   }
   else
   {
@@ -179,7 +180,7 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
            <div class="form-group col-sm-6">
             <label class="col-sm-4 control-label " for="AmountContributed"> Contribution Date</label>
             <div class="col-sm-8">
-              <input type="text" id="AmountContributed" name="AmountContributed" placeholder="Enter Amount" class="col-xs-12 col-sm-12" value="<?php echo $rst['AmountContributed'];?>" require="true"  />
+              <input type="text" id="AmountContributed" name="AmountContributed" placeholder="Enter Amount" class="col-xs-12 col-sm-12 NumberOnly" value="<?php echo $rst['AmountContributed'];?>" require="true"  />
             </div>
           </div>
          </div>
