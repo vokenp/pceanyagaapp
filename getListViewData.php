@@ -6,12 +6,11 @@ session_start();
    $user = $_SESSION['user'];
   $modCode = safehtml($_POST['ModCode']);
   
-
-  if (!VToken::checkT(trim($_POST['token']))) {
-    echo "InvalidRequest".$_POST['token'];
+ /* if (!VToken::checkT(trim($_POST['token']))) {
+    echo "InvalidRequest :- ".$_POST['token'];
     exit();
-  }
-  unset($_POST['_token']);
+  }*/
+  unset($_POST['token']);
 
   $MView = $rs->getDataTblView($modCode);
   $cols =  $MView["ViewCols"];
@@ -26,9 +25,6 @@ session_start();
   
   $userType = isset($_POST['userType']) ? $_POST['userType'] : "";
 
-
-
-    
    $columns = $_POST['columns'];
    $keyCount  = 0;
     foreach ($columns as $key => $Colval) {

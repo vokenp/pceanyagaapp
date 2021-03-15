@@ -115,7 +115,7 @@ $getCols = $db->GetArray("select FieldName,DisplayName,searchable from dh_listvi
         </div>
         </div><!-- WidgetBox -->  
         <input type="hidden" id="qrysmt" name="qrysmt">
-        <input type="hidden" name="token" id="token" value="<?php echo $token; ?>" class="token">
+        <input type="hidden" name="token" id="token" value="<?php echo $token;?>" class="token">
 <input type="hidden" name="modCode" id="modCode" value="<?php echo $mod;?>">
 <input type="hidden" name="enDeleteItems" id="enDeleteItems" value="<?php echo $rst["DeleteItems"];?>">
 <input type="hidden" name="EnableCreation" id="EnableCreation" value="<?php echo $rst["EnableCreation"];?>">

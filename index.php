@@ -7,10 +7,20 @@ if (!isset($_SESSION['user'])) {
    header("location: ulogin.php");
 }
 if(isset($_POST['tname'])){
-  
+   if (!function_exists('getallheaders')) {
+    function getallheaders() {
+    $headers = [];
+    foreach ($_SERVER as $name => $value) {
+        if (substr($name, 0, 5) == 'HTTP_') {
+            $headers[str_replace(' ', '-', ucwords(strtolower(str_replace('_', ' ', substr($name, 5)))))] = $value;
+        }
+    }
+    return $headers;
+    }
+}
+
 
   $list = getallheaders();
-
   if (isset($list["Cookie"])) {
      $Cookie = explode(';',$list["Cookie"]) ;
      list($sLabel,$sVal) = explode('=',$Cookie[0]);
