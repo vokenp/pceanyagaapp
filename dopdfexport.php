@@ -39,7 +39,7 @@ global $db;
    array_shift($cols);
 
      $getCols = $db->GetArray("select FieldName,DisplayName from dh_listview where ModuleCode='$ModuleCode'  and ListType='Main' and TableName='$tableName' order by DisplayOrder asc");
-   
+    $html ="";
     $html .="<p style='v-align:center;'> <img src='assets/images/logo.png' width='210px' height='70px'></p>";
     $html .="<p style='v-align:center;'><h2>$ModuleName</h2></p>";
 

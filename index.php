@@ -7,7 +7,10 @@ if (!isset($_SESSION['user'])) {
    header("location: ulogin.php");
 }
 if(isset($_POST['tname'])){
+  
+
   $list = getallheaders();
+
   if (isset($list["Cookie"])) {
      $Cookie = explode(';',$list["Cookie"]) ;
      list($sLabel,$sVal) = explode('=',$Cookie[0]);
