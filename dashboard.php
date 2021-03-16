@@ -13,6 +13,12 @@
        }
       
   ?>
+  <script>
+		$(document).ready(function() {
+			$("#population_chart").jChart({x_label:"Population",width:400});
+			$("#colors_chart").jChart();
+		});
+		</script>
 <div class="page-header">
   <h1>
     Dashboard
@@ -77,7 +83,7 @@
 					<tbody>
 						 <?php
 						    $html = "";
-						    $labels = array("label-danger","label-success","label-info","label-warning","label-default");
+						    $labels = array("label-danger","label-success","label-info","label-warning");
                             foreach ($Dist as $key => $valu) {
                             	$rand_keys = array_rand($labels, 1);
                             	$lbl = $labels[$rand_keys];
@@ -98,10 +104,58 @@
 
 		        </div><!-- Widget-main -->
 	      </div> <!-- End Widget-body -->
-	    </div> <!-- End WidgetBox -->
-
-				
+	    </div> <!-- End WidgetBox -->			
    </div>  <!-- End Col-6 -->
+
+   <div class="col-sm-7">
+   	<div class="widget-box">
+				<div class="widget-header widget-header-flat widget-header-small">
+					<h5 class="widget-title">
+						<i class="ace-icon fa fa-signal"></i>
+						Contribution on This Financial Year
+					</h5>
+				</div><!-- End Widget-header -->
+              <div class="widget-body">
+				<div class="widget-main">
+			
+		<div id="population_chart" data-sort="false" data-width="600" class="jChart chart-lg" name="">
+		<?php 
+				if(date('Y-m-d') <= date('Y')."-09-30")
+				{
+				  $curYear = date('Y') - 1;
+				  $curStart = $curYear."-10-01";
+				  $curEnd = date('Y')."-09-30";
+				}
+				else
+				{
+				  $curYear = date('Y') + 1; 
+				  $curStart = date('Y')."-10-01";
+				  $curEnd = $curYear."-09-30";
+				}
+			$getStats = $db->GetArray("select concat_ws('-',monthname(ContributionDate),year(ContributionDate))as Period,sum(AmountContributed) AmtContrib from vw_contribution where ContributionDate between '$curStart' and '$curEnd' group by Period ");
+			$colors = $rs->colors();
+				
+			 foreach($getStats as $skey => $sval)
+			 {
+				 $period = $sval["Period"];
+				 $AmtContrib = $sval["AmtContrib"];
+				$randKey = array_rand($colors,1);
+				$curColor = $colors[$skey];
+			   echo "<div class='define-chart-row' data-color='$curColor' title='$period'>$AmtContrib</div>";
+			   
+			 }
+
+			  ?>
+
+
+ </div>
+				</div><!-- End WidgetMain -->
+			</div><!-- End Widget Body -->
+		</div><!-- End Widget Box -->
+
+  
+   </div>
+
  </div>
 
 </div><!-- End Page-Content -->

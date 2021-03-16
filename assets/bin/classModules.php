@@ -371,11 +371,11 @@ function logFileAction($SessionID,$DocID,$CreatedBy,$LogAction,$Reason = null)
    {
     global $db;
     $colorCode = is_null($colorCode) ? "ItemCode,ItemDescription" : "ItemDescription,ItemCode";
-    $getColors = $db->GetArray("select $colorCode from listitems where ItemType='ColorPallete'");
+    $getColors = $db->GetArray("select $colorCode from listitems where ItemType='ColorPallete' order by rand()");
  $colors = array();
  foreach ($getColors as $key => $val) {
    
-    $colors[$val[1]] = trim($val[0]);
+    $colors[] = trim($val["ItemCode"]);
  }
    return $colors;
    }

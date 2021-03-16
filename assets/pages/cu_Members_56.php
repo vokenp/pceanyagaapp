@@ -179,7 +179,7 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
                   <div class="form-group col-sm-5">
             <label class="col-sm-4 control-label " for="DOB"> Date of Birth </label>
             <div class="col-sm-8">
-              <input type="text" id="DOB" name="DOB" placeholder="Enter Date of Birth" class="col-xs-12 col-sm-12" value="<?php echo $rst['DOB'];?>"  required="true" />
+              <input type="text" id="DOB" name="DOB" placeholder="Enter Date of Birth" class="col-xs-12 col-sm-12" value="<?php echo isdate($rst['DOB']);?>"  required="true" />
             </div>
           </div>
           <div class="form-group col-sm-5">
@@ -236,14 +236,14 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
           <div class="form-group col-sm-5">
             <label class="col-sm-4 control-label " for="DateofBaptism"> Date of Baptism</label>
             <div class="col-sm-8">
-              <input type="text" id="DateofBaptism" name="DateofBaptism" placeholder="Enter Date of Baptism" class="col-xs-12 col-sm-12" value="<?php echo $rst['DateofBaptism'];?>"   />
+              <input type="text" id="DateofBaptism" name="DateofBaptism" placeholder="Enter Date of Baptism" class="col-xs-12 col-sm-12" value="<?php echo isdate($rst['DateofBaptism']);?>"   />
             </div>
           </div>
 
            <div class="form-group col-sm-5">
             <label class="col-sm-4 control-label " for="Date of Confirmation"> Date of Confirmation </label>
             <div class="col-sm-8">
-              <input type="text" id="DateofConfirmation" name="DateofConfirmation" placeholder="Enter Date of Confirmation" class="col-xs-12 col-sm-12" value="<?php echo $rst['DateofConfirmation'];?>"   />
+              <input type="text" id="DateofConfirmation" name="DateofConfirmation" placeholder="Enter Date of Confirmation" class="col-xs-12 col-sm-12" value="<?php echo isdate($rst['DateofConfirmation']);?>"   />
             </div>
           </div>
 

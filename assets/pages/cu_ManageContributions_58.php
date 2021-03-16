@@ -129,7 +129,7 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
             <div class="col-sm-8">
               <select id="MemberNo" name="MemberNo" placeholder="Enter MemberNo" class="col-xs-11 col-sm-11 chosen-select">
                 <?php 
-                  $MemberNo = $rst["Member"];
+                  $MemberNo = $rst["MemberNo"];
                   $where = " where 1=1 ";
                  
                   if ($MemberNo != "") {
@@ -171,7 +171,7 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
            <div class="form-group col-sm-6">
             <label class="col-sm-4 control-label " for="ContributionDate"> Contribution Date</label>
             <div class="col-sm-8">
-              <input type="text" id="ContributionDate" name="ContributionDate" placeholder="Enter Contribution Date" class="col-xs-12 col-sm-12" value="<?php echo $rst['ContributionDate'];?>" require="true"  />
+              <input type="text" id="ContributionDate" name="ContributionDate" placeholder="Enter Contribution Date" class="col-xs-12 col-sm-12" value="<?php echo isdate($rst['ContributionDate']);?>" require="true"  />
             </div>
           </div>
          </div>

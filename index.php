@@ -82,6 +82,7 @@ $user = USERID;
 		<link rel="stylesheet" href="assets/css/bootstrap-timepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/daterangepicker.min.css" />
 		<link rel="stylesheet" href="assets/css/bootstrap-datetimepicker.min.css" />
+		<link rel="stylesheet" href="assets/css/jchart.css" />
 <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css">
   <link rel="stylesheet" href="plugins/sweetalert2/sweetalert2.min.css">
      
@@ -147,8 +148,7 @@ $user = USERID;
 
         <script src="assets/js/fullcalendar.min.js"></script>
 		<script src="assets/js/bootbox.js"></script>
-
-		
+        <script src="assets/js/jchart.js"></script>
         <script src="assets/plugins/ckeditor/ckeditor.js"></script>
 		<!-- ace scripts -->
 		<script src="assets/js/ace-elements.min.js"></script>
