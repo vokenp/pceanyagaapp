@@ -132,7 +132,7 @@
 				  $curStart = date('Y')."-10-01";
 				  $curEnd = $curYear."-09-30";
 				}
-			$getStats = $db->GetArray("select concat_ws('-',monthname(ContributionDate),year(ContributionDate))as Period,sum(AmountContributed) AmtContrib from vw_contribution where ContributionDate between '$curStart' and '$curEnd' group by Period ");
+			$getStats = $db->GetArray("select concat(Year(ContributionDate),Month(ContributionDate)) as PY,concat_ws('-',monthname(ContributionDate),year(ContributionDate))as Period,sum(AmountContributed) AmtContrib from vw_contribution where ContributionDate between '$curStart' and '$curEnd' group by Period,PY order by 1 desc");
 			$colors = $rs->colors();
 				
 			 foreach($getStats as $skey => $sval)
