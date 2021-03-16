@@ -15,7 +15,7 @@
   ?>
   <script>
 		$(document).ready(function() {
-			$("#population_chart").jChart({x_label:"Population",width:400});
+			$("#population_chart").jChart({y_label:"Contribution",width:400});
 			$("#colors_chart").jChart();
 		});
 		</script>
@@ -146,7 +146,9 @@
 			 }
 
 			  ?>
-
+         <div class="define-chart-footer">100</div>
+		<div class="define-chart-footer">500</div>
+		<div class="define-chart-footer">1000</div>
 
  </div>
 				</div><!-- End WidgetMain -->
