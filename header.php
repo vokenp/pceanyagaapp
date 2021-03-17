@@ -14,7 +14,7 @@
 					<a href="./" class="navbar-brand">
 						<small>
 							
-							<img src="assets/images/logo1.jpg" width="300px" height="52px">  ChurchApp
+							<img src="assets/images/logo1.jpg" width="300px" height="52px">  Management Information System
 						</small>
 					</a>
 				</div>

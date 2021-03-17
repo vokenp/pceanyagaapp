@@ -15,7 +15,7 @@ session_start();
 	<head>
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 		<meta charset="utf-8" />
-		<title>Login - PCEA Nyaga ChurchApp</title>
+		<title>Login - PCEA Nyaga Church - Management Informaton System</title>
 		<link href="assets/images/favicon.jpeg" rel="shortcut icon" type="image/vnd.microsoft.icon" />
 		<meta name="description" content="User login page" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -65,7 +65,7 @@ session_start();
 <div id="login-box" class="login-box visible widget-box no-border">
 	<div class="widget-body">
 		<div class="widget-main">
-			<h3 class="header blue lighter bigger" style="font-weight:bold;text-align:center;">PCEA Nyaga ChurchApp</h3>
+			<h3 class="header blue lighter bigger" style="font-weight:bold;text-align:center;">Church Management Information System</h3>
 			<h4 class="header blue lighter bigger">
 				<i class="ace-icon fa fa-coffee green"></i>
 				Please Enter Your Information
