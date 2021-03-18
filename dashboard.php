@@ -148,7 +148,7 @@
 			  ?>
          <div class="define-chart-footer">100</div>
 		<div class="define-chart-footer">500</div>
-		<div class="define-chart-footer">1000</div>
+		<div class="define-chart-footer">0</div>
 
  </div>
 				</div><!-- End WidgetMain -->

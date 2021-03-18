@@ -42,7 +42,6 @@ $UserID =  $UserInfo["S_ROWID"];
 $app = (int)filter_input(INPUT_GET, "app");
 define("USERID", $_SESSION['user']);
 $user = USERID;
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
