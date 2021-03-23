@@ -266,6 +266,30 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
 
         </div>
 
+        <div class="row">
+          <div class="form-group col-sm-5">
+            <label class="col-sm-4 control-label " for="ChurchGroup"> Church Group</label>
+            <div class="col-sm-8">
+             
+              <select id="ChurchGroups" name="ChurchGroups[]" placeholder="Enter Church Group" class="col-xs-11 col-sm-11 chosen-select" multiple="true">
+                <?php 
+             $MemID = $rst['S_ROWID'];
+             $ChurchGroups = explode(',', $rst["ChurchGroups"]);
+             $getData = $db->Execute("select ItemCode,ItemDescription from listitems where ItemType='ChurchGroups' ");
+             while (!$getData->EOF) {
+              $ItemCode = $getData->fields["ItemCode"];
+              $ItemDescription = $getData->fields["ItemDescription"];
+              $selected = in_array($ItemCode,$ChurchGroups) ? "selected" : "";
+              echo "<option value='$ItemCode' $selected>$ItemDescription</option>";
+              $getData->MoveNext();
+             }
+            ?>
+              </select>
+            </div>
+          </div>
+
+        </div>
+
           </div><!-- End Widget-Main -->
           <div class="widget-toolbox padding-8 clearfix text-center">
                <?php echo $btn; ?>

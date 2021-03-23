@@ -90,6 +90,7 @@ unset($_POST['_token']);
 
         if ($tableName == "tbl_members") {
           $record["MemberNo"] = generateUniqueCode($record["District"],getID($tableName),5);
+           
         }
 
        
@@ -103,7 +104,19 @@ unset($_POST['_token']);
         if ($db) {
      $S_ROWID = $db->GetOne("select max(S_ROWID) from $tableName");
 
-       
+          if ($table = "tbl_members") {
+            $MemGroups = explode(',',$record["ChurchGroups"]);
+            $DelCG = $db->Execute("delete from listitems where ItemType='ChurchGroupMember' and ItemCode='$S_ROWID' ");
+             foreach ($MemGroups as $key => $value) {
+        $rec["ItemDescription"] = $value;
+        $rec["ItemCode"] = $S_ROWID;
+        $rec["ItemType"] = "ChurchGroupMember";
+        $rec["CreatedBy"] = $user;
+        $table  = "listitems";
+        $action = "INSERT";
+        $db->AutoExecute($table,$rec,$action);
+      }
+           }
 
         if ($ReturnType == "RstID") {
           echo $S_ROWID;
@@ -137,8 +150,12 @@ unset($_POST['_token']);
       exit();
    }
    
+
+    
+
     $MetaColumns = $db->MetaColumns($tableName);
     foreach ($MetaColumns as $key => $val) {
+
        $MetaType[$val->name] = $val->type;
     }
 
@@ -152,6 +169,8 @@ unset($_POST['_token']);
       unset($_POST['ReturnType']);
       unset($_POST['ModCode']);
       array_walk($_POST,"cleanDataHtml");
+
+
      foreach ($_POST as $ckey => $cval) {
        $cval = is_array($cval) ? implode(',', $cval) : $cval;
        if ($tableName == "listitems") {
@@ -180,21 +199,20 @@ unset($_POST['_token']);
        $db->AutoExecute($table,$record,$action,$criteria);
        
         if ($db) {
-         if ($table == "assemblybizdocs") {
-            $DocInfo = $db->GetRow("select *from $table where S_ROWID='$S_ROWID'");
-            $DocID = $DocInfo["DocID"];
-            $FileInfo = $db->GetRow("select New_FileName,FileDescription from elementstorage where S_ROWID='$DocID'");
-            list($CategoryName,$CategoryID) = explode('-',$DocInfo["DocumentCategory"]);
-            $rec["StoragePool"]     = $DocInfo["DocumentCategory"];
-            $rec["FileDescription"] = $DocInfo["DocumentTitle"];
-            $rec["New_FileName"] =   str_replace($FileInfo["FileDescription"], $DocInfo["DocumentTitle"], $FileInfo["New_FileName"]);
-
-  
-            $criteria = "S_ROWID = '$DocID'";
-          $table  = "elementstorage";
-           $action = "UPDATE";
-          $db->AutoExecute($table,$rec,$action,$criteria);
-          }
+           
+           if ($table = "tbl_members") {
+            $MemGroups = explode(',',$record["ChurchGroups"]);
+            $DelCG = $db->Execute("delete from listitems where ItemType='ChurchGroupMember' and ItemCode='$S_ROWID' ");
+             foreach ($MemGroups as $key => $value) {
+        $rec["ItemDescription"] = $value;
+        $rec["ItemCode"] = $S_ROWID;
+        $rec["ItemType"] = "ChurchGroupMember";
+        $rec["CreatedBy"] = $user;
+        $table  = "listitems";
+        $action = "INSERT";
+        $db->AutoExecute($table,$rec,$action);
+      }
+           }
 
          if ($ReturnType == "RstID") {
           echo $S_ROWID;

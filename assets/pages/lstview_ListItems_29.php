@@ -199,7 +199,7 @@
 						<div class="col-sm-8">
 						  <select name="ItemType" id="ItemType" required="true" class="chosen-select form-control" style="width:90%">
 						  	<?php 
-							    $getData = $db->Execute("select distinct ItemType from listitems where ItemType not in ('Gender','Country','filterConditions','AppType','usertype','RoleUser','RoleProfile','DeleteItems','FontAwesome','ColorPallete','SystemTables','ModuleListView','MenuType','ModActions','ButtonType','ModuleType','MaritalStatus')");
+							    $getData = $db->Execute("select distinct ItemType from listitems where ItemType not in ('Gender','Country','filterConditions','AppType','usertype','RoleUser','RoleProfile','DeleteItems','FontAwesome','ColorPallete','SystemTables','ModuleListView','MenuType','ModActions','ButtonType','ModuleType','MaritalStatus','ChurchGroupMember')");
 							     echo "<option value=''></option>";
 							      while (!$getData->EOF) {
 							      	$ItemType = $getData->fields["ItemType"];
