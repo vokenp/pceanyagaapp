@@ -199,6 +199,11 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
                 <?php 
                   $DistrictID = $rst["District"];
                   $where = " where 1=1 ";
+                   $userType = $UserInfo["user_type"];
+                  if($userType == "Deacon")
+                  {
+                    $where .= "  and DistrictCode in (select DistrictCode from tbl_districts where MATCH(DistrictLeader,Deacon1,Deacon1) AGAINST ('$user' IN BOOLEAN MODE))";
+                  }
                  
                   if ($DistrictID != "") {
                     $DistrictName = $db->GetOne("select DistrictName from tbl_districts where DistrictCode='$DistrictID'");
@@ -218,6 +223,7 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
                   }
                 ?>
               </select>
+              
             </div>
           </div>
 

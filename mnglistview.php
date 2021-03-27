@@ -163,7 +163,7 @@ $getCols = $db->GetArray("select FieldName,DisplayName,searchable from dh_listvi
  dtListView.on('xhr', function() {
   var ajaxJson = dtListView.ajax.json();
   $("#qrysmt").val(ajaxJson.QryParams.qrysmt);
-
+    
    dotoken();
 });
 

@@ -23,42 +23,39 @@ session_start();
   $SearchValue = safehtml(trim($search["value"]));
    $where = " where 1=1 ";
   
-  $userType = isset($_POST['userType']) ? $_POST['userType'] : "";
+   $userInfo = $rs->row("dh_users","loginid = '$user'");
+
+  $userType = isset($userInfo['user_type']) ? $userInfo['user_type'] : "";
 
    $columns = $_POST['columns'];
    $keyCount  = 0;
-    foreach ($columns as $key => $Colval) {
-    	  $ColName = $Colval["name"];
-    	if ($Colval["searchable"] == "true" && $SearchValue !="") {
-    		$operator = $keyCount == 0 ? "and" : "or";
-    		$where .= " $operator $ColName like '%$SearchValue%' ";
-    		$keyCount +=1;
-    	}
-    }
+   $SearchCol = array();
+   foreach ($columns as $key => $Colval) {
+       $ColName = $Colval["name"];
+     if ($Colval["searchable"] == "true" && $SearchValue !="" && $ColName != "") {
+       $SearchCol[] = $ColName;
+       $keyCount +=1;
+     }
+   }
+
+    $arg = array_filter($SearchCol);
+      if (!empty($arg)) {
+        $SCols = implode(',', $SearchCol);
+        $where .= " and CONCAT_ws('-',$SCols) like '%$SearchValue%'";
+      }
 
 
      if ($userType != "") {
         $criteria = "";
          if ($ModuleName == "Members") {
-             $criteria = $userType == "Admin" ? "" : " and S_ROWID in (select MemID from vw_commMemberList where ClerkResponsible='$user') ";
+             $criteria = $userType == "Deacon" ?  " and District in (select DistrictCode from tbl_districts where MATCH(DistrictLeader,Deacon1,Deacon1) AGAINST ('$user' IN BOOLEAN MODE)) " : "";
              
          }
-         elseif ($ModuleName == "Committees") 
+         elseif ($ModuleName == "Manage Contributions") 
          {
-            $criteria = $userType == "Admin" ? "" : " and ClerkResponsible='$user' ";
+          $criteria = $userType == "Deacon" ?  " and DistrictCode in (select DistrictCode from tbl_districts where MATCH(DistrictLeader,Deacon1,Deacon1) AGAINST ('$user' IN BOOLEAN MODE)) " : "";
          }
-         elseif ($ModuleName == "Committee Meetings") 
-         {
-           $criteria = $userType == "Admin" ? "" : " and CommitteeID in (select S_ROWID from assemblycommittees where ClerkResponsible='$user') ";
-         }
-         elseif ($ModuleName == "Schedule of Meetings") 
-         {
-           $criteria = $userType == "Admin" ? "" : " and CommitteeID in (select S_ROWID from assemblycommittees where ClerkResponsible='$user') ";
-         }
-         elseif ($ModuleName == "Committee Notifications") 
-         {
-           $criteria = $userType == "Admin" ? "" : " and CommitteeID in (select S_ROWID from assemblycommittees where ClerkResponsible='$user') ";
-         }
+         
       
        $where .= " $criteria ";
      }
@@ -120,7 +117,7 @@ session_start();
    $respsmt["wheresmt"]= $where;
    $FinalSmt = json_encode($respsmt);
    $_SESSION["exportParams"] = $respsmt;
-   $searchqry["qrysmt"] = OpensslEncryptHelper::encrypt($FinalSmt);
+   $searchqry["qrysmt"] = $userType;
 
    $array = array();
    $array["draw"] = $_POST['draw'];

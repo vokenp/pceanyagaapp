@@ -1,14 +1,7 @@
-<?php
- include("assets/bin/con_db.php");
-  global $db;
-  $db->debug=1;
-  error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
-
-echo "<pre>";
- $list = getallheaders();
- print_r($list);
-
-  
-?>
+CREATE DEFINER=`root`@`localhost` FUNCTION `getuinfo`(UserID int) RETURNS varchar(255) CHARSET utf8mb4
+    DETERMINISTIC
+BEGIN
+     DECLARE FullName VARCHAR(255);
+      select concat_ws(' ',FirstName,OtherNames,concat('(',PhoneNo,')')) into FullName from tbl_saccousers where S_ROWID = UserID;
+     RETURN FullName;
+    END

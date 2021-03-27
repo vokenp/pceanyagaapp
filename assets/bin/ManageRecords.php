@@ -200,7 +200,7 @@ unset($_POST['_token']);
        
         if ($db) {
            
-           if ($table = "tbl_members") {
+           if ($table == "tbl_members") {
             $MemGroups = explode(',',$record["ChurchGroups"]);
             $DelCG = $db->Execute("delete from listitems where ItemType='ChurchGroupMember' and ItemCode='$S_ROWID' ");
              foreach ($MemGroups as $key => $value) {

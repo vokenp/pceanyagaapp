@@ -3,6 +3,7 @@ include("../timeout.php");
  include("con_db.php");
  global $db;
  //$db->debug=1;
+ $user = $_SESSION['user'];
   $modCode = safehtml($_POST['ModCode']);
   $PYear = safehtml($_POST['PYear']);
   $DistrictCode = safehtml($_POST['DistrictCode']);
@@ -15,7 +16,8 @@ include("../timeout.php");
   $ModuleCode = $MView["ModInfo"]["ModuleCode"];
   $ModuleName = $MView["ModInfo"]["ModuleName"];
   $EnablePreview = $MView["ModInfo"]["EnablePreview"];
-   $District = $DistrictCode == "All" ? "" : " and DistrictCode='$DistrictCode'";
+  
+   $District = $DistrictCode == "All" ? "  and DistrictCode in (select DistrictCode from tbl_districts where MATCH(DistrictLeader,Deacon1,Deacon1) AGAINST ('$user' IN BOOLEAN MODE))" : " and DistrictCode='$DistrictCode'";
   $search = $_POST['search'];
   $SearchValue = safehtml(trim($search["value"]));
 

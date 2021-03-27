@@ -140,21 +140,21 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
               <select name="DistrictLeader" id="DistrictLeader" placeholder="Enter District Leader" class="col-xs-11 col-sm-11 chosen-select" required="true">
                 <?php 
                   $DistrictLeader = $rst["DistrictLeader"];
-                  $where = " where ChurchRole <>'Member' ";
+                  $where = " where user_type = 'Deacon' ";
 
                   if ($DistrictLeader != "") {
-                    $LeaderName = $db->GetOne("select MemberName from tbl_members where MemberNo='$DistrictLeader'");
+                    $LeaderName = $db->GetOne("select Fullname from dh_users where loginid='$DistrictLeader'");
                     echo "<option value='$DistrictLeader'>$DistrictLeader - $LeaderName</option>";
-                    $where .= " and MemberNo<>'$DistrictLeader'";
+                    $where .= " and loginid<>'$DistrictLeader'";
                   }
                   else
                   {
                     echo "<option value=''></option>";
                   }
-                  $getData = $db->Execute("select MemberNo,MemberName from tbl_members $where");
+                  $getData = $db->Execute("select loginid,Fullname from dh_users $where");
                   while (!$getData->EOF) {
-                    $DistrictLeader = $getData->fields["MemberNo"];
-                    $LeaderName = $getData->fields["MemberName"];
+                    $DistrictLeader = $getData->fields["loginid"];
+                    $LeaderName = $getData->fields["Fullname"];
                     echo "<option value='$DistrictLeader'>$DistrictLeader - $LeaderName</option>";
                     $getData->MoveNext();
                   }
@@ -171,21 +171,21 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
               <select name="Deacon1" id="Deacon1" placeholder="Enter Deacon Name" class="col-xs-11 col-sm-11 chosen-select" required="true">
                 <?php 
                   $Deacon1 = $rst["Deacon1"];
-                  $where = " where ChurchRole <>'Member' ";
+                  $where = " where user_type = 'Deacon' ";
                  
                   if ($Deacon1 != "") {
-                    $DeaconName1 = $db->GetOne("select MemberName from tbl_members where MemberNo='$Deacon1'");
+                    $DeaconName1 = $db->GetOne("select Fullname from dh_users where loginid='$Deacon1'");
                     echo "<option value='$Deacon1'>$Deacon1 - $DeaconName1</option>";
-                    $where .= " and MemberNo<>'$Deacon1'";
+                    $where .= " and loginid<>'$Deacon1'";
                   }
                   else
                   {
                     echo "<option value=''></option>";
                   }
-                  $getData = $db->Execute("select MemberNo,MemberName from tbl_members $where");
+                  $getData = $db->Execute("select loginid,Fullname from dh_users $where");
                   while (!$getData->EOF) {
-                    $Deacon1 = $getData->fields["MemberNo"];
-                    $DeaconName1 = $getData->fields["MemberName"];
+                    $Deacon1 = $getData->fields["loginid"];
+                    $DeaconName1 = $getData->fields["Fullname"];
                     echo "<option value='$Deacon1'>$Deacon1 - $DeaconName1</option>";
                     $getData->MoveNext();
                   }
@@ -200,21 +200,21 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
              <select name="Deacon2" id="Deacon2" placeholder="Enter Deacon Name" class="col-xs-11 col-sm-11 chosen-select" required="true">
                 <?php 
                 $Deacon2 = $rst["Deacon2"];
-                $where = " where ChurchRole <>'Member' ";
+                $where = " where user_type = 'Deacon' ";
                
                 if ($Deacon2 != "") {
-                  $DeaconName2 = $db->GetOne("select MemberName from tbl_members where MemberNo='$Deacon2'");
+                  $DeaconName2 = $db->GetOne("select Fullname from dh_users where loginid='$Deacon2'");
                   echo "<option value='$Deacon2'>$Deacon2 - $DeaconName2</option>";
-                  $where .= " and MemberNo<>'$Deacon2'";
+                  $where .= " and loginid<>'$Deacon2'";
                 }
                 else
                 {
                   echo "<option value=''></option>";
                 }
-                $getData = $db->Execute("select MemberNo,MemberName from tbl_members $where");
+                $getData = $db->Execute("select loginid,Fullname from dh_users $where");
                 while (!$getData->EOF) {
-                  $Deacon2 = $getData->fields["MemberNo"];
-                  $DeaconName2 = $getData->fields["MemberName"];
+                  $Deacon2 = $getData->fields["loginid"];
+                  $DeaconName2 = $getData->fields["Fullname"];
                   echo "<option value='$Deacon2'>$Deacon2 - $DeaconName2</option>";
                   $getData->MoveNext();
                 }

@@ -117,7 +117,13 @@ $getCols = $db->GetArray("select FieldName,DisplayName,searchable from dh_listvi
               <select name="DistrictCode" id="DistrictCode"  class="col-xs-12 col-sm-12" style="width:100%;">
                 <?php 
                    echo "<option value='All'>All Districts</option>";
-                  $getData = $db->Execute("select *from tbl_districts");
+                   $userType = $UserInfo["user_type"];
+                   $where = " where 1=1 ";
+                   if($userType == "Deacon")
+                   {
+                     $where .= "  and DistrictCode in (select DistrictCode from tbl_districts where MATCH(DistrictLeader,Deacon1,Deacon1) AGAINST ('$user' IN BOOLEAN MODE))";
+                   }
+                  $getData = $db->Execute("select *from tbl_districts $where");
                     while (!$getData->EOF) {
                       $DistrictCode = $getData->fields["DistrictCode"];
                       $DistrictName = $getData->fields["DistrictName"];
