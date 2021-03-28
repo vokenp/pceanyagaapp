@@ -131,9 +131,15 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
                 <?php 
                   $MemberNo = $rst["MemberNo"];
                   $where = " where 1=1 ";
+                   
+                  $userType = $UserInfo["user_type"];
+                  if($userType == "Deacon")
+                  {
+                    $where .= "  and District in (select DistrictCode from tbl_districts where MATCH(DistrictLeader,Deacon1,Deacon1) AGAINST ('$user' IN BOOLEAN MODE))";
+                  }
                  
                   if ($MemberNo != "") {
-                    $MemberName = $db->GetOne("select MemberName from tbl_members where MemberNo='$MemberNo'");
+                    $MemberName = $db->GetOne("select MemberName from vw_members where MemberNo='$MemberNo'");
                     echo "<option value='$MemberNo'>$MemberNo - $MemberName</option>";
                     $where .= " and MemberNo<>'$MemberNo'";
                   }
@@ -141,7 +147,7 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
                   {
                     echo "<option value=''></option>";
                   }
-                  $getData = $db->Execute("select MemberNo,MemberName from tbl_members $where");
+                  $getData = $db->Execute("select MemberNo,MemberName from vw_members $where");
                   while (!$getData->EOF) {
                     $MemberNo = $getData->fields["MemberNo"];
                     $MemberName = $getData->fields["MemberName"];
