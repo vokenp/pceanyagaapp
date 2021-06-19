@@ -9,11 +9,11 @@ $op = filter_input(INPUT_GET, "view");
   if ($op == "add") {
     $S_ROWID = "";
     $cid = "";
-   
+
     $btn = "<button type='submit' name='btnSaveRecord' id='btnSaveRecord' class='btn btn-sm btn-success' ><i class='fa fa-edit'></i> Save Record</button>";
     $getColumns = $db->metaColumnNames($TableName);
     foreach ($getColumns as $key => $value) {
-       $rst[$value] = "";  
+       $rst[$value] = "";
     }
     $rst["ContributionDate"] = date('d-m-Y');
   }
@@ -28,14 +28,14 @@ $rst = $rs->row($TableName,"S_ROWID='$cid'");
     }
 $S_ROWID = "<input type='hidden' name='S_ROWID' id='S_ROWID' value='$cid'>";
 $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class='btn btn-sm btn-success' ><i class='fa fa-edit'></i> Update Record</button>";
-   
+
   }
-  
+
   ?>
 <script type="text/javascript">
 	$(document).ready(function(){
 		var op = $("#op").val();
-		  
+
        var dateToday = new Date();
       $("#ContributionDate").datepicker({
                     autoclose: true,
@@ -43,27 +43,27 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
                     todayHighlight: true,
                     minDate : dateToday
                 })
-                
+
                 .next().on(ace.click_event, function(){
                     $(this).prev().focus();
-                }); 
+                });
 
 		$("#frmPageTemp").validate({
 				debug: false,
 				rules: {
-				
+
 				},
 				messages: {
-				  
+
 				},
 				submitHandler: function(form) {
 				// do other stuff for a valid form
-				
-				$.post('assets/bin/ManageRecords.php', $("#frmPageTemp").serialize(), 
+
+				$.post('assets/bin/ManageRecords.php', $("#frmPageTemp").serialize(),
 				function(data) {
 					if (data.length < 30)
 					{
-				
+
 					 if(op == "add")
 					 {
 					 var urlstr = $("#url").val();
@@ -128,16 +128,16 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
             <label class="col-sm-4 control-label " for="MemberNo"> Member Name </label>
             <div class="col-sm-8">
               <select id="MemberNo" name="MemberNo" placeholder="Enter MemberNo" class="col-xs-11 col-sm-11 chosen-select">
-                <?php 
+                <?php
                   $MemberNo = $rst["MemberNo"];
                   $where = " where 1=1 ";
-                   
+
                   $userType = $UserInfo["user_type"];
                   if($userType == "Deacon")
                   {
                     $where .= "  and District in (select DistrictCode from tbl_districts where MATCH(DistrictLeader,Deacon1,Deacon1) AGAINST ('$user' IN BOOLEAN MODE))";
                   }
-                 
+
                   if ($MemberNo != "") {
                     $MemberName = $db->GetOne("select MemberName from vw_members where MemberNo='$MemberNo'");
                     echo "<option value='$MemberNo'>$MemberNo - $MemberName</option>";
@@ -157,7 +157,7 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
                 ?>
               </select>
             </div>
-          </div> 
+          </div>
 
 			   </div>
 
@@ -184,7 +184,7 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
 
          <div class="row">
            <div class="form-group col-sm-6">
-            <label class="col-sm-4 control-label " for="AmountContributed"> Contribution Date</label>
+            <label class="col-sm-4 control-label " for="AmountContributed"> Amount Contributed</label>
             <div class="col-sm-8">
               <input type="text" id="AmountContributed" name="AmountContributed" placeholder="Enter Amount" class="col-xs-12 col-sm-12 NumberOnly" value="<?php echo $rst['AmountContributed'];?>" require="true"  />
             </div>
@@ -203,14 +203,7 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
 
          </div>
 
-         <div class="row">
-           <div class="form-group col-sm-6">
-            <label class="col-sm-4 control-label " for="Remarks"> Remarks</label>
-            <div class="col-sm-8">
-              <input type="text" id="Remarks" name="Remarks" placeholder="Enter Remarks" class="col-xs-12 col-sm-12" value="<?php echo $rst['Remarks'];?>"   />
-            </div>
-          </div>
-         </div>
+        
 
 
           </div><!-- End Widget-Main -->
@@ -218,6 +211,6 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
                <?php echo $btn; ?>
           </div>
         </div><!-- End Widget-body -->
-         
+
     </form>
 </div><!-- End WidgetBox -->

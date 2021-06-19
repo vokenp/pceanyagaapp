@@ -9,11 +9,11 @@ $op = filter_input(INPUT_GET, "view");
   if ($op == "add") {
     $S_ROWID = "";
     $cid = "";
-   
+
     $btn = "<button type='submit' name='btnSaveRecord' id='btnSaveRecord' class='btn btn-sm btn-success' ><i class='fa fa-edit'></i> Save Record</button>";
     $getColumns = $db->metaColumnNames($TableName);
     foreach ($getColumns as $key => $value) {
-       $rst[$value] = "";  
+       $rst[$value] = "";
     }
   }
   else
@@ -27,9 +27,9 @@ $rst = $rs->row($TableName,"S_ROWID='$cid'");
     }
 $S_ROWID = "<input type='hidden' name='S_ROWID' id='S_ROWID' value='$cid'>";
 $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class='btn btn-sm btn-success' ><i class='fa fa-edit'></i> Update Record</button>";
-   
+
   }
-  
+
   ?>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -42,27 +42,27 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
                     todayHighlight: true,
                     minDate : dateToday
                 })
-                
+
                 .next().on(ace.click_event, function(){
                     $(this).prev().focus();
-                }); 
-		
+                });
+
 		$("#frmPageTemp").validate({
 				debug: false,
 				rules: {
-				
+
 				},
 				messages: {
-				  
+
 				},
 				submitHandler: function(form) {
 				// do other stuff for a valid form
-				
-				$.post('assets/bin/ManageRecords.php', $("#frmPageTemp").serialize(), 
+
+				$.post('assets/bin/ManageRecords.php', $("#frmPageTemp").serialize(),
 				function(data) {
 					if (data.length < 30)
 					{
-				
+
 					 if(op == "add")
 					 {
 					 var urlstr = $("#url").val();
@@ -147,7 +147,7 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
           <div class="form-group col-sm-5">
             <label class="col-sm-4 control-label " for="Email"> Email </label>
             <div class="col-sm-8">
-              <input type="email" id="Email" name="Email" placeholder="Enter Email" class="col-xs-11 col-sm-11" value="<?php echo $rst['Email'];?>"  required="false" />
+              <input type="email" id="Email" name="Email" placeholder="Enter Email" class="col-xs-11 col-sm-11" value="<?php echo $rst['Email'];?>"   />
             </div>
           </div>
          </div>
@@ -157,7 +157,7 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
           <div class="form-group col-sm-5">
             <label class="col-sm-4 control-label " for="Gender"> Gender </label>
             <div class="col-sm-8">
-              <select id="Gender" name="Gender" placeholder="Enter Gender" class="col-xs-11 col-sm-11 chosen-select">
+              <select id="Gender" name="Gender" placeholder="Enter Gender" class="col-xs-11 col-sm-11 chosen-select" required="true">
                 <?php echo $rs->GetListItems($rst["Gender"],"Gender",$op);?>
               </select>
             </div>
@@ -170,8 +170,8 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
                 <?php echo $rs->GetListItems($rst["MaritalStatus"],"MaritalStatus",$op);?>
               </select>
             </div>
-          </div> 
- 
+          </div>
+
          </div>
 
 
@@ -179,7 +179,7 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
                   <div class="form-group col-sm-5">
             <label class="col-sm-4 control-label " for="DOB"> Date of Birth </label>
             <div class="col-sm-8">
-              <input type="text" id="DOB" name="DOB" placeholder="Enter Date of Birth" class="col-xs-12 col-sm-12" value="<?php echo isdate($rst['DOB']);?>"  required="true" />
+              <input type="text" id="DOB" name="DOB" placeholder="Enter Date of Birth" class="col-xs-12 col-sm-12" value="<?php echo isdate($rst['DOB']);?>"   />
             </div>
           </div>
           <div class="form-group col-sm-5">
@@ -190,13 +190,13 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
           </div>
          </div>
 
-          
+
            <div class="row">
           <div class="form-group col-sm-5">
             <label class="col-sm-4 control-label " for="District"> District </label>
             <div class="col-sm-8">
-              <select id="District" name="District" placeholder="Enter District" class="col-xs-11 col-sm-11 chosen-select">
-                <?php 
+              <select id="District" name="District" placeholder="Enter District" class="col-xs-11 col-sm-11 chosen-select" required="true">
+                <?php
                   $DistrictID = $rst["District"];
                   $where = " where 1=1 ";
                    $userType = $UserInfo["user_type"];
@@ -204,7 +204,7 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
                   {
                     $where .= "  and DistrictCode in (select DistrictCode from tbl_districts where MATCH(DistrictLeader,Deacon1,Deacon1) AGAINST ('$user' IN BOOLEAN MODE))";
                   }
-                 
+
                   if ($DistrictID != "") {
                     $DistrictName = $db->GetOne("select DistrictName from tbl_districts where DistrictCode='$DistrictID'");
                     echo "<option value='$DistrictID'>$DistrictID - $DistrictName</option>";
@@ -223,7 +223,7 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
                   }
                 ?>
               </select>
-              
+
             </div>
           </div>
 
@@ -234,8 +234,8 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
                 <?php echo $rs->GetListItems($rst["ChurchRole"],"ChurchRole",$op);?>
               </select>
             </div>
-          </div> 
- 
+          </div>
+
          </div>
 
          <div class="row">
@@ -254,7 +254,7 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
           </div>
 
         </div>
-        
+
          <div class="row">
           <div class="form-group col-sm-5">
             <label class="col-sm-4 control-label " for="HolyComNo"> HolyComNo</label>
@@ -276,9 +276,9 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
           <div class="form-group col-sm-5">
             <label class="col-sm-4 control-label " for="ChurchGroup"> Church Group</label>
             <div class="col-sm-8">
-             
+
               <select id="ChurchGroups" name="ChurchGroups[]" placeholder="Enter Church Group" class="col-xs-11 col-sm-11 chosen-select" multiple="true">
-                <?php 
+                <?php
              $MemID = $rst['S_ROWID'];
              $ChurchGroups = explode(',', $rst["ChurchGroups"]);
              $getData = $db->Execute("select ItemCode,ItemDescription from listitems where ItemType='ChurchGroups' ");
@@ -301,6 +301,6 @@ $btn = "<button type='submit' name='btnUpdateRecord' id='btnUpdateRecord' class=
                <?php echo $btn; ?>
           </div>
         </div><!-- End Widget-body -->
-         
+
     </form>
 </div><!-- End WidgetBox -->

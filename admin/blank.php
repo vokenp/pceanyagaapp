@@ -20,9 +20,12 @@
 			case 137:
 				include("MngListItems.php");
 				break;
-			
+			case 138:
+					include("MngAppsConfig.php");
+				break;
+
 			default:
-				
+
 				break;
 		}
 	?>
